@@ -255,25 +255,53 @@ export function initGmail() {
 
     ipcRenderer.on('gmail:compose-mail', async (_event, to?: string) => {
       clickElement('div[gh="cm"]')
+      console.log("gmail:compose-mail")
+      console.log(to)
 
       if (!to) {
         return
       }
 
-      const toElement = await elementReady<HTMLTextAreaElement>(
-        'textarea[name="to"]',
+      const formElement = await elementReady<HTMLTextAreaElement>(
+        'form[class="bAs"]',
         {
           stopOnDomReady: false,
-          timeout: 60000
+          timeout: 5000
         }
       )
 
-      if (!toElement) {
+      console.log("formElement")
+      console.log(formElement)
+      if (!formElement) {
         return
       }
 
+      const toDivElement = formElement.querySelector<HTMLInputElement>(
+        'div[name="to"]'
+      )
+
+      console.log("toDivElement")
+      console.log(toDivElement)
+      if (!toDivElement) {
+        return
+      }
+
+      toDivElement.focus()
+      console.log("focus")
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log("time")
+
+      const toElement = toDivElement.querySelector<HTMLInputElement>(
+        'input'
+      )
+      if (!toElement) {
+        return
+      }
+      console.log("focus2")
       toElement.focus()
       toElement.value = to
+      console.log("to")
+      console.log(to)
 
       const subjectElement = document.querySelector<HTMLInputElement>(
         'input[name="subjectbox"]'

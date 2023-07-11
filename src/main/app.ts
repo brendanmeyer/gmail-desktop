@@ -35,7 +35,18 @@ export async function initApp() {
     app.disableHardwareAcceleration()
   }
 
-  app.on('second-instance', () => {
+  app.on('second-instance', (event, argv, workingDirectory) => {
+    console.log(event)
+    console.log(argv)
+    console.log(workingDirectory)
+
+    let mailtoString = argv.find(s => s.startsWith('mailto:'));
+
+    if (mailtoString) {
+      console.log("Mailto Address: " + mailtoString); // Outputs: 'mailto:example@example.com'
+      sendToSelectedAccountView('gmail:compose-mail', mailtoString.split(':')[1])
+    }
+
     showMainWindow()
   })
 
