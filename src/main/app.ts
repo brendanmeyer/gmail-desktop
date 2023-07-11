@@ -36,22 +36,18 @@ export async function initApp() {
   }
 
   app.on('second-instance', (event, argv, workingDirectory) => {
-    console.log(event)
-    console.log(argv)
-    console.log(workingDirectory)
+    const mailtoString = argv.find((s) => s.startsWith('mailto:'))
 
-    let mailtoString = argv.find(s => s.startsWith('mailto:'));
-
+    // Process mailto: data
     if (mailtoString) {
-      console.log("Mailto Address: " + mailtoString); // Outputs: 'mailto:example@example.com'
-      sendToSelectedAccountView('gmail:compose-mail', mailtoString.split(':')[1])
+      sendToSelectedAccountView('gmail:compose-mail', mailtoString)
     }
 
     showMainWindow()
   })
 
   app.on('open-url', (_event, mailto) => {
-    sendToSelectedAccountView('gmail:compose-mail', mailto.split(':')[1])
+    sendToSelectedAccountView('gmail:compose-mail', mailto)
 
     showMainWindow()
   })
