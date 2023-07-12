@@ -291,8 +291,9 @@ export function initGmail() {
 
         newMessageElement.ariaChecked = 'true'
 
-        const toDivElement =
-          newMessageElement.querySelector<HTMLInputElement>('div[name="to"]')
+        const toDivElement = newMessageElement.querySelector<HTMLInputElement>(
+          'div[name="to"]'
+        )
 
         if (!toDivElement) {
           return
@@ -373,10 +374,9 @@ export function initGmail() {
           bccElement.value = bcc
         }
 
-        const subjectElement =
-          newMessageElement.querySelector<HTMLInputElement>(
-            'input[name="subjectbox"]'
-          )
+        const subjectElement = newMessageElement.querySelector<HTMLInputElement>(
+          'input[name="subjectbox"]'
+        )
         if (!subjectElement) {
           return
         }

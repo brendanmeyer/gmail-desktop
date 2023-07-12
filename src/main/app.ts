@@ -35,7 +35,7 @@ export async function initApp() {
     app.disableHardwareAcceleration()
   }
 
-  app.on('second-instance', (event, argv, workingDirectory) => {
+  app.on('second-instance', (_event, argv, _workingDirectory) => {
     const mailtoString = argv.find((s) => s.startsWith('mailto:'))
 
     // Process mailto: data
